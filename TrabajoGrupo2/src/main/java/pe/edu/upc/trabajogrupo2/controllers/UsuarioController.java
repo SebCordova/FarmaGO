@@ -2,6 +2,8 @@ package pe.edu.upc.trabajogrupo2.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajogrupo2.dtos.UsuarioDTO;
 import pe.edu.upc.trabajogrupo2.entities.Usuario;
@@ -16,7 +18,10 @@ public class UsuarioController {
 
     @Autowired
     private IUsuarioService uS;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    @PreAuthorize("hasAuthority('Administrador')")
     @GetMapping
     public List<UsuarioDTO> listar(){
         return uS.list().stream().map(x->{
@@ -25,10 +30,13 @@ public class UsuarioController {
         }).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica') or hasAuthority('Cliente')")
     @PostMapping
     public void registrar(@RequestBody UsuarioDTO dto){
         ModelMapper m = new ModelMapper();
         Usuario u = m.map(dto, Usuario.class);
+        String encodedPassword = passwordEncoder.encode(u.getClaveUsuario());
+        u.setClaveUsuario(encodedPassword);
         uS.insert(u);
     }
 
@@ -40,6 +48,7 @@ public class UsuarioController {
         return dto;
     }
 
+    @PreAuthorize("hasAuthority('Administrador')")
     @PutMapping
     public void modificar(@RequestBody UsuarioDTO dto){
         ModelMapper m = new ModelMapper();
@@ -47,6 +56,7 @@ public class UsuarioController {
         uS.update(u);
     }
 
+    @PreAuthorize("hasAuthority('Administrador')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         uS.delete(id);

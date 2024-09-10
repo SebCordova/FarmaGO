@@ -12,9 +12,9 @@ public class DetalleOrden {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idDetalleOrden;
 
-    @Column(name = "precioproducto", nullable = false)
+    @Column(name = "cantidadProducto", nullable = false)
     private int cantidadProducto;
-    @Column(name = "fechaemision", nullable = false)
+    @Column(name = "precioxCantidadProducto", nullable = false)
     private double precioxCantidadProducto;
 
     @ManyToOne

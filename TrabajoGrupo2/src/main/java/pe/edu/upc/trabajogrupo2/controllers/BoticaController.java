@@ -2,6 +2,7 @@ package pe.edu.upc.trabajogrupo2.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajogrupo2.dtos.BoticaDTO;
 import pe.edu.upc.trabajogrupo2.entities.Botica;
@@ -17,6 +18,7 @@ public class BoticaController {
     @Autowired
     private IBoticaService bS;
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @GetMapping
     public List<BoticaDTO> listar(){
         return bS.list().stream().map(x->{
@@ -25,6 +27,7 @@ public class BoticaController {
         }).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @PostMapping
     public void registrar(@RequestBody BoticaDTO dto){
         ModelMapper m = new ModelMapper();
@@ -40,6 +43,7 @@ public class BoticaController {
         return dto;
     }
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @PutMapping
     public void modificar(@RequestBody BoticaDTO dto){
         ModelMapper m = new ModelMapper();
@@ -47,6 +51,7 @@ public class BoticaController {
         bS.update(b);
     }
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         bS.delete(id);
