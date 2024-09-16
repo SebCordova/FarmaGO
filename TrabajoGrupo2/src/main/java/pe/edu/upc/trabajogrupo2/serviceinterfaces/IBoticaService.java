@@ -10,4 +10,6 @@ public interface IBoticaService {
     public Botica listId(int id);
     public void update(Botica botica);
     public void delete(int id);
+    public List<Botica> listarBoticasDistrito(int idDistrito);
+    public List<String[]> listarDistritoMayorCantBoticas();
 }

@@ -39,4 +39,14 @@ public class BoticaServiceImplement implements IBoticaService {
     public void delete(int id) {
         bR.deleteById(id);
     }
+
+    @Override
+    public List<Botica> listarBoticasDistrito(int idDistrito) {
+        return bR.listarBoticasPorDistrito(idDistrito);
+    }
+
+    @Override
+    public List<String[]> listarDistritoMayorCantBoticas() {
+        return bR.listarDistritoMayorCantBoticas();
+    }
 }

@@ -38,4 +38,10 @@ public class ProductoxBoticaServiceImplement implements IProductoxBoticaService 
     public void delete(int id) {
         IprodxBotRepo.deleteById(id);
     }
+
+    @Override
+    public List<String[]> productosVencidosPorBotica(int idBotica) {
+        return IprodxBotRepo.listarProductosVencidos(idBotica);
+    }
+
 }

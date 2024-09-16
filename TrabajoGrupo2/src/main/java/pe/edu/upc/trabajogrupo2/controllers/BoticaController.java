@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajogrupo2.dtos.BoticaDTO;
+import pe.edu.upc.trabajogrupo2.dtos.DistritoConMayorBoticasDTO;
 import pe.edu.upc.trabajogrupo2.entities.Botica;
 import pe.edu.upc.trabajogrupo2.serviceinterfaces.IBoticaService;
 
@@ -56,4 +57,23 @@ public class BoticaController {
     public void eliminar(@PathVariable("id") Integer id){
         bS.delete(id);
     }
+
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
+    @GetMapping("/buscarporDistrito")
+    public List<BoticaDTO> listarBoticasPorDistrito(@RequestParam int idDistrito) {
+        return bS.listarBoticasDistrito(idDistrito).stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,BoticaDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/buscardistritocantboticas")
+    public List<DistritoConMayorBoticasDTO> listarDistritoMayorCantBoticas() {
+        return bS.listarDistritoMayorCantBoticas().stream().map(x->{
+            ModelMapper m=new ModelMapper();
+            return m.map(x,DistritoConMayorBoticasDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+
 }

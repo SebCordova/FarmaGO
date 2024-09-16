@@ -12,4 +12,5 @@ public interface IProductoxBoticaService {
     public ProductoxBotica listId(int id);
     public void update(ProductoxBotica ProdxBot);
     public void delete(int id);
+    public List<String[]> productosVencidosPorBotica(int idBotica);
 }
