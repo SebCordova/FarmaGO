@@ -2,6 +2,7 @@ package pe.edu.upc.trabajogrupo2.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajogrupo2.dtos.OrdenCompraDTO;
 import pe.edu.upc.trabajogrupo2.entities.OrdenCompra;
@@ -16,6 +17,7 @@ public class OrdenCompraController {
     @Autowired
     private IOrdenCompraService oS;
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @GetMapping
     public List<OrdenCompraDTO> listar(){
         return oS.list().stream().map(x -> {
@@ -39,6 +41,7 @@ public class OrdenCompraController {
         return dto;
     }
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @PutMapping
     public void modificar(@RequestBody OrdenCompraDTO dto){
         ModelMapper m = new ModelMapper();
@@ -46,6 +49,7 @@ public class OrdenCompraController {
         oS.update(oc);
     }
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         oS.delete(id);
