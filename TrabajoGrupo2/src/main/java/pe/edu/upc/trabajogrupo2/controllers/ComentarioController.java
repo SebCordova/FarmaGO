@@ -27,7 +27,7 @@ public class ComentarioController {
         }).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Usuario')")
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @PostMapping
     public void registrar(@RequestBody ComentarioDTO dto){
         ModelMapper m = new ModelMapper();
@@ -43,7 +43,7 @@ public class ComentarioController {
         return dto;
     }
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Usuario')")
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @PutMapping
     public void modificar(@RequestBody ComentarioDTO dto){
         ModelMapper m = new ModelMapper();
@@ -51,7 +51,7 @@ public class ComentarioController {
         cS.update(b);
     }
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Usuario')")
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         cS.delete(id);
