@@ -20,6 +20,7 @@ public class ProductoController {
     @Autowired
     private IProductoService pS;
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @GetMapping
     public List<ProductoDTO> listar(){
         return pS.list().stream().map(x -> {
@@ -28,7 +29,7 @@ public class ProductoController {
         }).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('DBotica')")
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @PostMapping
     public void registrar(@RequestBody ProductoDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -44,6 +45,7 @@ public class ProductoController {
         return dto;
     }
 
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @PutMapping
     public void modificar(@RequestBody ProductoDTO dto){
         ModelMapper m = new ModelMapper();
@@ -51,7 +53,7 @@ public class ProductoController {
         pS.update(r);
     }
 
-    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         pS.delete(id);
