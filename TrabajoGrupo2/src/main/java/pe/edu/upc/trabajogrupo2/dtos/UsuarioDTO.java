@@ -2,6 +2,8 @@ package pe.edu.upc.trabajogrupo2.dtos;
 
 import pe.edu.upc.trabajogrupo2.entities.Rol;
 
+import java.util.List;
+
 public class UsuarioDTO {
     private int idUsuario;
     private String nomUsuario;
@@ -9,7 +11,8 @@ public class UsuarioDTO {
     private String dirUsuario;
     private String correoUsuario;
     private String claveUsuario;
-    private Rol rol;
+   private List<Rol> roles;
+    private boolean habilitado;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -59,11 +62,19 @@ public class UsuarioDTO {
         this.claveUsuario = claveUsuario;
     }
 
-    public Rol getRol() {
-        return rol;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
     }
 }

@@ -1,10 +1,14 @@
 package pe.edu.upc.trabajogrupo2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
@@ -17,26 +21,31 @@ public class Usuario {
     private String dirUsuario;
     @Column(name = "correoUsuario", nullable = false, length = 50)
     private String correoUsuario;
-    @Column(name = "claveUsuario", nullable = false, length = 30)
+    @Column(name = "claveUsuario", nullable = false, length = 300)
     private String claveUsuario;
+    @Column(name = "habilitado")
+    private boolean habilitado;
 
-    @ManyToOne
-    @JoinColumn(name = "idRol")
-    private Rol rol;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Rol> roles;
 
-    public Usuario() {
+   public Usuario() {
 
     }
 
-    public Usuario(int idUsuario, String nomUsuario, String apelUsuario, String dirUsuario, String correoUsuario, String claveUsuario, Rol rol) {
+    public Usuario(int idUsuario, String nomUsuario, String apelUsuario, String dirUsuario, String correoUsuario, String claveUsuario, boolean habilitado, List<Rol> roles) {
         this.idUsuario = idUsuario;
         this.nomUsuario = nomUsuario;
         this.apelUsuario = apelUsuario;
         this.dirUsuario = dirUsuario;
         this.correoUsuario = correoUsuario;
         this.claveUsuario = claveUsuario;
-        this.rol = rol;
+        this.habilitado = habilitado;
+        this.roles = roles;
     }
+
 
     public int getIdUsuario() {
         return idUsuario;
@@ -86,11 +95,20 @@ public class Usuario {
         this.claveUsuario = claveUsuario;
     }
 
-    public Rol getRol() {
-        return rol;
+
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
     }
 }

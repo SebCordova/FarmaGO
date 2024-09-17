@@ -2,6 +2,7 @@ package pe.edu.upc.trabajogrupo2.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajogrupo2.dtos.ProductoDTO;
 import pe.edu.upc.trabajogrupo2.dtos.RolDTO;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/productos")
+
 public class ProductoController {
     @Autowired
     private IProductoService pS;
@@ -26,6 +28,7 @@ public class ProductoController {
         }).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAuthority('DBotica')")
     @PostMapping
     public void registrar(@RequestBody ProductoDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -48,6 +51,7 @@ public class ProductoController {
         pS.update(r);
     }
 
+    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         pS.delete(id);
