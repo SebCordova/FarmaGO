@@ -18,7 +18,7 @@ public class ComentarioController {
     @Autowired
     private IComentarioService cS;
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Usuario')")
+    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @GetMapping
     public List<ComentarioDTO> listar(){
         return cS.list().stream().map(x->{
