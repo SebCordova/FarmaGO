@@ -23,7 +23,6 @@ public class ComentarioController {
     @Autowired
     private IComentarioService ICServ;
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @GetMapping
     public List<ComentarioDTO> listar(){
         return ICServ.list().stream().map(x -> {
@@ -33,7 +32,6 @@ public class ComentarioController {
     }
 
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @PostMapping
     public void registrar(@RequestBody ComentarioDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -41,7 +39,6 @@ public class ComentarioController {
         ICServ.insert(com);
     }
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @GetMapping("/{id}")
     public ComentarioDTO listarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
@@ -50,7 +47,6 @@ public class ComentarioController {
         return dto;
     }
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @PutMapping
     public void modificar(@RequestBody ComentarioDTO dto){
         ModelMapper m = new ModelMapper();
@@ -58,7 +54,6 @@ public class ComentarioController {
         ICServ.update(comen);
     }
 
-    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         ICServ.delete(id);
@@ -72,7 +67,6 @@ public class ComentarioController {
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('Cliente')")
     @GetMapping("/usuariosmascomentarios")
     public List<UsuarioComentarioDTO> listarUsuariosConMasComentariosController() {
         List<String[]> lista = ICServ.listarUsuariosConMasComentarios();

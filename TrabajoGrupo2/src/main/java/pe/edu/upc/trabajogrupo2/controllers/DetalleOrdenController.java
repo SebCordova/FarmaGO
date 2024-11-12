@@ -31,7 +31,7 @@ public class DetalleOrdenController {
         }).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('Cliente')")
+    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
     @PostMapping
     public void registrar(@RequestBody DetalleOrdenDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -56,14 +56,14 @@ public class DetalleOrdenController {
         IDS.update(r);
     }
 
-    @PreAuthorize("hasAuthority('Cliente')")
+    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         IDS.delete(id);
     }
 
 
-    @PreAuthorize("hasAuthority('Cliente')")
+    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
     @GetMapping("/productovendidoxbotica")
     public List<ProductoVendidoxBoticaDTO> ProductoVendidoxBoticaController(){
 

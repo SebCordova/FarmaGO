@@ -18,7 +18,6 @@ public class RolController {
     @Autowired
     private IRolService rS;
 
-    @PreAuthorize("hasAuthority('Administrador')")
     @GetMapping
     public List<RolDTO> listar(){
         return rS.list().stream().map(x->{
@@ -27,7 +26,6 @@ public class RolController {
         }).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('Administrador')")
     @PostMapping
     public void registrar(@RequestBody RolDTO dto){
         ModelMapper m = new ModelMapper();

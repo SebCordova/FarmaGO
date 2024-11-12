@@ -51,7 +51,7 @@ public class OrdenCompraController {
         oS.update(oc);
     }
 
-    @PreAuthorize("hasAuthority('Cliente')")
+    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         oS.delete(id);
