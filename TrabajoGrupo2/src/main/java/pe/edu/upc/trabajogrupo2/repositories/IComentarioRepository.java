@@ -16,8 +16,7 @@ public interface IComentarioRepository extends JpaRepository<Comentario, Integer
             "            FROM Comentario com\n "+
             "            INNER JOIN Usuario u ON com.id_usuario=u.id_usuario\n" +
             "            GROUP BY com.id_usuario,u.nom_usuario\n" +
-            "            ORDER BY totalComentarios DESC\n" +
-            "     limit 1", nativeQuery = true)
+            "            ORDER BY totalComentarios DESC", nativeQuery = true)
     public List<String[]> listarUsuariosConMasComentarios();
 
     @Query("SELECT c FROM Comentario c WHERE c.PxBotica.idProductoxBotica = :idProductoxBotica")
