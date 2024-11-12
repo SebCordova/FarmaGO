@@ -29,7 +29,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = IUsuarioRepo.findOneByNomUsuario(username);
+        Usuario user = IUsuarioRepo.findOneByCorreoUsuario(username);
 
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User not exists", username));
@@ -42,7 +42,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         });
 
 
-        UserDetails ud = new org.springframework.security.core.userdetails.User(user.getNomUsuario(), user.getClaveUsuario(), user.isHabilitado(), true, true, true, roles);
+        UserDetails ud = new org.springframework.security.core.userdetails.User(user.getCorreoUsuario(), user.getClaveUsuario(), user.isHabilitado(), true, true, true, roles);
 
         return ud;
     }
