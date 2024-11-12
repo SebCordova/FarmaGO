@@ -17,6 +17,6 @@ public interface IBoticaRepository extends JpaRepository<Botica, Integer> {
             " FROM botica b\n" +
             " JOIN distrito d ON b.id_distrito = d.id_distrito\n" +
             " GROUP BY d.nom_distrito\n" +
-            " ORDER BY cant_boticas DESC;", nativeQuery = true)
+            " ORDER BY cant_boticas DESC LIMIT 5;", nativeQuery = true)
     public List<String[]> listarDistritoMayorCantBoticas();
 }
