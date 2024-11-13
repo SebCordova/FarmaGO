@@ -80,7 +80,6 @@ public class BoticaController {
         }).collect(Collectors.toList());
     }*/
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @GetMapping("/buscardistritocantboticas")
     public List<DistritoConMayorBoticasDTO> listarDistritoMayorCantBoticas() {
         List<String[]> lista= bS.listarDistritoMayorCantBoticas();
