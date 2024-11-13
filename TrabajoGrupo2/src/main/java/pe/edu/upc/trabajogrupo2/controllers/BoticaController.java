@@ -61,7 +61,6 @@ public class BoticaController {
     }
 
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @GetMapping("/buscarporDistrito")
     public List<BoticaDTO> listarBoticasPorDistrito(@RequestParam int idDistrito) {
         return bS.listarBoticasDistrito(idDistrito).stream().map(x->{
