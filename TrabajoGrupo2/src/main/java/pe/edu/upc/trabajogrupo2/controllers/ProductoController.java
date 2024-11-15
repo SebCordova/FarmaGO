@@ -21,7 +21,6 @@ public class ProductoController {
     @Autowired
     private IProductoService pS;
 
-    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @GetMapping
     public List<ProductoDTO> listar(){
         return pS.list().stream().map(x -> {

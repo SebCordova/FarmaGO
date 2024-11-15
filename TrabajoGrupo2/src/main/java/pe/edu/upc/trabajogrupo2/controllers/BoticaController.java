@@ -21,7 +21,6 @@ public class BoticaController {
     @Autowired
     private IBoticaService bS;
 
-    @PreAuthorize("hasAuthority('Administrador') or hasAuthority('DBotica')")
     @GetMapping
     public List<BoticaDTO> listar(){
         return bS.list().stream().map(x->{

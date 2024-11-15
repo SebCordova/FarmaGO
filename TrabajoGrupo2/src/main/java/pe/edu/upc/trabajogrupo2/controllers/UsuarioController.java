@@ -42,7 +42,6 @@ public class UsuarioController {
     public UsuarioDTO listarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         UsuarioDTO dto = m.map(uS.listId(id), UsuarioDTO.class);
-
         return dto;
     }
 
@@ -56,5 +55,12 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
         uS.delete(id);
+    }
+
+    @GetMapping("/{email}")
+    public UsuarioDTO buscarPorEmail(@PathVariable("email") String email){
+        ModelMapper m = new ModelMapper();
+        UsuarioDTO dto = m.map(uS.listEmail(email), UsuarioDTO.class);
+        return dto;
     }
 }
