@@ -34,7 +34,7 @@ public class ProductoxBoticaController {
     }
     @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @PostMapping
-    public void registrar(@RequestBody ProductoxBoticaDTO dto) {
+    public void registrar(@RequestBody ProductoxBoticaDTO dto) { 
         ModelMapper m = new ModelMapper();
         ProductoxBotica pxb = m.map(dto, ProductoxBotica.class);
         IxBServ.insert(pxb);
