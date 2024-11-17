@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.trabajogrupo2.dtos.RolDTO;
 import pe.edu.upc.trabajogrupo2.dtos.UsuarioDTO;
 import pe.edu.upc.trabajogrupo2.entities.Usuario;
 import pe.edu.upc.trabajogrupo2.serviceinterfaces.IUsuarioService;
@@ -42,6 +43,7 @@ public class UsuarioController {
     public UsuarioDTO listarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         UsuarioDTO dto = m.map(uS.listId(id), UsuarioDTO.class);
+
         return dto;
     }
 
@@ -57,10 +59,4 @@ public class UsuarioController {
         uS.delete(id);
     }
 
-    @GetMapping("/{email}")
-    public UsuarioDTO buscarPorEmail(@PathVariable("email") String email){
-        ModelMapper m = new ModelMapper();
-        UsuarioDTO dto = m.map(uS.listEmail(email), UsuarioDTO.class);
-        return dto;
-    }
 }
