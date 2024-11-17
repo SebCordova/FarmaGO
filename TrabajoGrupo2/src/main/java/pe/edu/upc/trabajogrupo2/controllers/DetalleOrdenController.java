@@ -78,7 +78,9 @@ public class DetalleOrdenController {
         for(String[] x:lista){
             ProductoVendidoxBoticaDTO dto= new ProductoVendidoxBoticaDTO();
             dto.setBotica(Integer.parseInt(x[0]));
-            dto.setProductoVendido((Integer.parseInt(x[1])));
+            dto.setProductoVendido(Integer.parseInt(x[1]));
+            dto.setNombreB((x[2]));
+            dto.setNombreP(((x[3])));
             listaDTO.add(dto);
 
         }
@@ -104,10 +106,10 @@ public class DetalleOrdenController {
             BoticaConMayoresVentasDTO dto= new BoticaConMayoresVentasDTO();
             dto.setIdBotica(Integer.parseInt(x[0]));
             dto.setMonto((Double.parseDouble(x[1])));
+            dto.setNombreBotica((x[2]));
             listaDTO.add(dto);
 
         }
         return listaDTO;
-
     }
 }
