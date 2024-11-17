@@ -3,7 +3,34 @@ package pe.edu.upc.trabajogrupo2.dtos;
 public class ProductoVendidoxBoticaDTO {
 
     private int Botica;
+    private String NombreB;
     private int ProductoVendido;
+    private String NombreP;
+    private int Cantidad;
+
+    public int getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        Cantidad = cantidad;
+    }
+
+    public String getNombreB() {
+        return NombreB;
+    }
+
+    public void setNombreB(String nombreB) {
+        NombreB = nombreB;
+    }
+
+    public String getNombreP() {
+        return NombreP;
+    }
+
+    public void setNombreP(String nombreP) {
+        NombreP = nombreP;
+    }
 
     public int getBotica() {
         return Botica;

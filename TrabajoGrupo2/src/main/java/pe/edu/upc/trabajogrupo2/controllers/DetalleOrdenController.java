@@ -5,11 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajogrupo2.dtos.*;
-import pe.edu.upc.trabajogrupo2.entities.Botica;
 import pe.edu.upc.trabajogrupo2.entities.DetalleOrden;
-import pe.edu.upc.trabajogrupo2.entities.Producto;
 import pe.edu.upc.trabajogrupo2.serviceinterfaces.IDetalleOrdenService;
-import pe.edu.upc.trabajogrupo2.serviceinterfaces.IProductoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +60,7 @@ public class DetalleOrdenController {
     }
 
 
-    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
+    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @GetMapping("/productovendidoxbotica")
     public List<ProductoVendidoxBoticaDTO> ProductoVendidoxBoticaController(){
 
@@ -78,7 +75,10 @@ public class DetalleOrdenController {
         for(String[] x:lista){
             ProductoVendidoxBoticaDTO dto= new ProductoVendidoxBoticaDTO();
             dto.setBotica(Integer.parseInt(x[0]));
-            dto.setProductoVendido((Integer.parseInt(x[1])));
+            dto.setProductoVendido(Integer.parseInt(x[1]));
+            dto.setNombreB((x[2]));
+            dto.setNombreP(((x[3])));
+            dto.setCantidad(Integer.parseInt(x[4]));
             listaDTO.add(dto);
 
         }
@@ -88,7 +88,7 @@ public class DetalleOrdenController {
 
 
 
-    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
+    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @GetMapping("/boticasconmayoresventas")
     public List<BoticaConMayoresVentasDTO> BoticaConMayoresVentasController(){
 
@@ -104,10 +104,10 @@ public class DetalleOrdenController {
             BoticaConMayoresVentasDTO dto= new BoticaConMayoresVentasDTO();
             dto.setIdBotica(Integer.parseInt(x[0]));
             dto.setMonto((Double.parseDouble(x[1])));
+            dto.setNombreBotica((x[2]));
             listaDTO.add(dto);
 
         }
         return listaDTO;
-
     }
 }
