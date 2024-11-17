@@ -43,11 +43,10 @@ public interface IDetalleOrdenRepository extends JpaRepository<DetalleOrden, Int
             " ON PXB.id_productox_botica = DETO.id_productox_botica\n" +
             "INNER JOIN botica on PXB.id_botica=botica.id_botica\n" +
             " group by\n" +
-            " PXB.id_botica\n" +
-            "botica.nombre_botica\n"+
+            " PXB.id_botica,\n" +
+            " botica.nombre_botica\n"+
             " Order by\n" +
             " SUM(DETO.preciox_cantidad_producto) DESC\n" +
-            " INNER JOIN botica on PXB.id_botica=botica.id_botica \n" +
             " Limit 3;",nativeQuery = true)
     public List<String[]> BoticasConMayoresVentas();
 
