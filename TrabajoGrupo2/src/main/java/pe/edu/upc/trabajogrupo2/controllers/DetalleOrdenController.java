@@ -5,11 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.trabajogrupo2.dtos.*;
-import pe.edu.upc.trabajogrupo2.entities.Botica;
 import pe.edu.upc.trabajogrupo2.entities.DetalleOrden;
-import pe.edu.upc.trabajogrupo2.entities.Producto;
 import pe.edu.upc.trabajogrupo2.serviceinterfaces.IDetalleOrdenService;
-import pe.edu.upc.trabajogrupo2.serviceinterfaces.IProductoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +60,7 @@ public class DetalleOrdenController {
     }
 
 
-    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
+    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @GetMapping("/productovendidoxbotica")
     public List<ProductoVendidoxBoticaDTO> ProductoVendidoxBoticaController(){
 
@@ -81,6 +78,7 @@ public class DetalleOrdenController {
             dto.setProductoVendido(Integer.parseInt(x[1]));
             dto.setNombreB((x[2]));
             dto.setNombreP(((x[3])));
+            dto.setCantidad(Integer.parseInt(x[4]));
             listaDTO.add(dto);
 
         }
@@ -90,7 +88,7 @@ public class DetalleOrdenController {
 
 
 
-    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
+    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @GetMapping("/boticasconmayoresventas")
     public List<BoticaConMayoresVentasDTO> BoticaConMayoresVentasController(){
 

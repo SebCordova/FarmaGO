@@ -6,6 +6,15 @@ public class ProductoVendidoxBoticaDTO {
     private String NombreB;
     private int ProductoVendido;
     private String NombreP;
+    private int Cantidad;
+
+    public int getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        Cantidad = cantidad;
+    }
 
     public String getNombreB() {
         return NombreB;

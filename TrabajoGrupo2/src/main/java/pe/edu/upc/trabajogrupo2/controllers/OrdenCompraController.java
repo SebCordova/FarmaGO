@@ -65,7 +65,7 @@ public class OrdenCompraController {
         }).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('Cliente') or hasAuthority('Administrador')")
+    @PreAuthorize("hasAuthority('DBotica') or hasAuthority('Administrador')")
     @GetMapping("/usuariosconmayoresordenes")
     public List<UsuarioOrdenesDTO> UsuariosConMasOrdenesController() {
 
